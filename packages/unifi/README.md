@@ -103,12 +103,25 @@ is `id` in Site Manager's `listHosts`. Ubiquiti issues the two kinds of key in d
 places (the console's Integrations settings for local, unifi.ui.com for the connector and the
 cloud-only APIs), so provide the `ApiKey` that matches the way in.
 
-From the environment, `Unifi.CredentialsFromEnv` provides both layers (a layer is only
-resolved by the calls that need it):
+Every Network, Protect and InnerSpace operation also takes an optional `console`, which wins
+over the layer for that call and is not sent:
+
+```ts
+const sites = yield* Unifi.getSiteOverviewPage({
+  console: { _tag: "Remote", consoleId: "<consoleId>" },
+});
+```
+
+`Unifi.cloudBaseUrl(url)` replaces `https://api.ui.com` for Site Manager, Mobility, Carrier
+Fabric and the connector alike.
+
+From the environment, `Unifi.CredentialsFromEnv` provides all three layers (the key and console
+are only resolved by the calls that need them):
 
 - `ApiKeyFromEnv`: `UNIFI_API_KEY`.
 - `ConsoleFromEnv`: `UNIFI_CONSOLE_HOST` (local, a host or origin) or else `UNIFI_CONSOLE_ID`
-  (cloud connector, on `UNIFI_CLOUD_API_BASE_URL` when set).
+  (cloud connector).
+- `CloudBaseUrlFromEnv`: `UNIFI_CLOUD_API_BASE_URL`, when set.
 
 ## Not covered
 

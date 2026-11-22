@@ -3,6 +3,7 @@ import * as API from "@distilled.cloud/core/api";
 import * as S from "@distilled.cloud/core/schema-lite";
 import * as __L from "@distilled.cloud/core/schema-lite";
 import type * as Redacted from "effect/Redacted";
+import type { ConsoleLocation } from "../credentials.ts";
 import { UnknownUniFiError } from "../errors.ts";
 import { paginateOffset } from "../pagination.ts";
 import {
@@ -34,6 +35,8 @@ export interface AdoptDeviceRequest {
   siteId: string;
   ignoreDeviceLimit: boolean;
   macAddress: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UserDefinedEntityMetadataOrigin = "USER_DEFINED";
 export interface UserDefinedEntityMetadata {
@@ -200,6 +203,8 @@ export type ACLRuleUpdate =
 export interface CreateAclRuleRequest {
   siteId: string;
   body: ACLRuleUpdate;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 /** ACL rule action */
 export type ACLRuleAction = "ALLOW" | "BLOCK";
@@ -342,6 +347,8 @@ export type CreateOrUpdateDNSPolicy =
 export interface CreateDnsPolicyRequest {
   siteId: string;
   body: CreateOrUpdateDNSPolicy;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationDnsAaaaRecordDtoType = "AAAA_RECORD";
 export interface IntegrationDnsAaaaRecordDto {
@@ -1344,6 +1351,8 @@ export interface CreateFirewallPolicyRequest {
   reportFlowEnabled?: boolean | undefined;
   schedule?: FirewallSchedule | undefined;
   source: FirewallPolicySource;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type FirewallPolicyConnectionStateFilterItem = "NEW" | "INVALID" | "ESTABLISHED" | "RELATED";
 /** Match on firewall connection state. If null, matches all connection states. */
@@ -1388,6 +1397,8 @@ export interface CreateFirewallZoneRequest {
   name: string;
   /** List of Network IDs */
   networkIds: CreateFirewallZoneRequestNetworkIdsList;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UserOrSystemDefinedEntityMetadata =
   | SystemDefinedEntityMetadata
@@ -1680,6 +1691,8 @@ export type CreateOrUpdateNetwork =
 export interface CreateNetworkRequest {
   siteId: string;
   body: CreateOrUpdateNetwork;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GatewayManagedNetworkDetailsManagement = "GATEWAY";
 export type OrchestratedEntityMetadataOrigin = "ORCHESTRATED";
@@ -1820,6 +1833,8 @@ export type CreateOrUpdateTrafficMatchingList =
 export interface CreateTrafficMatchingListRequest {
   siteId: string;
   body: CreateOrUpdateTrafficMatchingList;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationIpV4TrafficMatchingListDtoType = "IPV4_ADDRESSES";
 export type IntegrationIpV4TrafficMatchingListDtoItemsList = Array<IPv4Matching>;
@@ -1866,6 +1881,8 @@ export interface CreateVouchersRequest {
   timeLimitMinutes: number;
   /** (Optional) upload rate limit in kilobits per second */
   txRateLimitKbps?: number | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface HotspotVoucherDetails {
   /** (Optional) timestamp when the voucher has been activated (authorization time of the first guest) */
@@ -2324,6 +2341,8 @@ export type WifiBroadcastCreateOrUpdate =
 export interface CreateWifiBroadcastRequest {
   siteId: string;
   body: WifiBroadcastCreateOrUpdate;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UserOrDerivedOrOrchestratedEntityMetadata =
   | DerivedEntityMetadata
@@ -2405,37 +2424,51 @@ export type CreateWifiBroadcastResponse = WifiBroadcastDetails;
 export interface DeleteAclRuleRequest {
   siteId: string;
   aclRuleId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteAclRuleResponse {}
 export interface DeleteDnsPolicyRequest {
   siteId: string;
   dnsPolicyId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteDnsPolicyResponse {}
 export interface DeleteFirewallPolicyRequest {
   siteId: string;
   firewallPolicyId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteFirewallPolicyResponse {}
 export interface DeleteFirewallZoneRequest {
   siteId: string;
   firewallZoneId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteFirewallZoneResponse {}
 export interface DeleteNetworkRequest {
   siteId: string;
   networkId: string;
   force?: boolean | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteNetworkResponse {}
 export interface DeleteTrafficMatchingListRequest {
   siteId: string;
   trafficMatchingListId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteTrafficMatchingListResponse {}
 export interface DeleteVoucherRequest {
   siteId: string;
   voucherId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface VoucherDeletionResults {
   vouchersDeleted?: number | undefined;
@@ -2443,11 +2476,15 @@ export interface VoucherDeletionResults {
 export interface DeleteVouchersRequest {
   siteId: string;
   filter: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteWifiBroadcastRequest {
   siteId: string;
   wifiBroadcastId: string;
   force?: boolean | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DeleteWifiBroadcastResponse {}
 export type DeviceRestartRequestAction = "RESTART";
@@ -2458,6 +2495,8 @@ export interface ExecuteAdoptedDeviceActionRequest {
   siteId: string;
   deviceId: string;
   body: DeviceRestartRequest;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface ExecuteAdoptedDeviceActionResponse {}
 export type GuestAccessAuthorizationRequestAction = "AUTHORIZE_GUEST_ACCESS";
@@ -2484,6 +2523,8 @@ export interface ExecuteConnectedClientActionRequest {
   siteId: string;
   clientId: string;
   body: ClientActionRequest;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GuestAccessAuthorizationResponseAction = "AUTHORIZE_GUEST_ACCESS";
 /** Guest authorization method (API, Voucher etc) */
@@ -2535,15 +2576,21 @@ export interface ExecutePortActionRequest {
   deviceId: string;
   portIdx: number;
   body: PortPoEPowerCycleRequest;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface ExecutePortActionResponse {}
 export interface GetAclRuleRequest {
   siteId: string;
   aclRuleId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GetAclRuleResponse = ACLRule;
 export interface GetAclRuleOrderingRequest {
   siteId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type ACLRuleOrderingOrderedAclRuleIdsList = Array<string>;
 export interface ACLRuleOrdering {
@@ -2554,6 +2601,8 @@ export interface GetAclRulePageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type ACLRuleObject = IntegrationIpAclRuleDto | IntegrationMacAclRuleDto;
 export type IntegrationAclRulePageDtoDataList = Array<ACLRuleObject>;
@@ -2567,10 +2616,14 @@ export interface IntegrationAclRulePageDto {
 export interface GetAdoptedDeviceDetailsRequest {
   siteId: string;
   deviceId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface GetAdoptedDeviceLatestStatisticsRequest {
   siteId: string;
   deviceId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type LatestStatisticsForWirelessRadioFrequencyGHz = 0.9 | 2.4 | 5 | 6 | 60;
 export interface LatestStatisticsForWirelessRadio {
@@ -2602,6 +2655,8 @@ export interface GetAdoptedDeviceOverviewPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type AdoptedDeviceOverviewFeaturesItem = "switching" | "accessPoint" | "gateway";
 export type AdoptedDeviceOverviewFeaturesList = Array<AdoptedDeviceOverviewFeaturesItem>;
@@ -2642,6 +2697,8 @@ export interface AdoptedDeviceOverviewPage {
 export interface GetConnectedClientDetailsRequest {
   siteId: string;
   clientId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type DefaultClientAccessDetailsType = "DEFAULT";
 /** Represents the type of network access and/or any applicable authorization status the client is using. - **Wired clients** may have direct access without additional authorization. - **Wireless clients** can be connected via a protected network or an open network that may require additional authorization (e.g., a guest portal). - **VPN clients** may have different authorization mechanisms. Currently, the only two supported access types are `GUEST` (used for wired and wireless guest clients) and `DEFAULT` (a placeholder, which might be refined in the future releases, used for all other clients). Filtering is possible by `access.type`, for example `access.type.eq('GUEST')` to list guest clients. */
@@ -2697,6 +2754,8 @@ export interface GetConnectedClientOverviewPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type TeleportClientConnectionOverviewType = "TELEPORT";
 export interface TeleportClientConnectionOverview {
@@ -2755,6 +2814,8 @@ export interface GetCountriesRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface CountryDefinition {
   /** The country code in ISO 3166-1 alpha-2 format. */
@@ -2850,6 +2911,8 @@ export interface GetDeviceTagPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: FilterExpression | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type DeviceTagDeviceIdsList = Array<string>;
 export type UserOrOrchestratedEntityMetadata =
@@ -2872,6 +2935,8 @@ export interface IntegrationDeviceTagPageDto {
 export interface GetDnsPolicyRequest {
   siteId: string;
   dnsPolicyId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GetDnsPolicyResponse = DNSPolicy;
 export interface GetDnsPolicyPageRequest {
@@ -2879,6 +2944,8 @@ export interface GetDnsPolicyPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationDnsPolicyPageDtoDataList = Array<DNSPolicy>;
 export interface IntegrationDnsPolicyPageDto {
@@ -2892,6 +2959,8 @@ export interface GetDpiApplicationCategoriesRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface DPICategory {
   id: number;
@@ -2909,6 +2978,8 @@ export interface GetDpiApplicationsRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type DPIApplication = DPICategory;
 export type DPIApplicationPageDataList = Array<DPICategory>;
@@ -2924,6 +2995,8 @@ export interface GetFirewallPoliciesRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type FirewallPolicyPageDataList = Array<FirewallPolicy>;
 export interface FirewallPolicyPage {
@@ -2936,11 +3009,15 @@ export interface FirewallPolicyPage {
 export interface GetFirewallPolicyRequest {
   siteId: string;
   firewallPolicyId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface GetFirewallPolicyOrderingRequest {
   siteId: string;
   sourceFirewallZoneId: string;
   destinationFirewallZoneId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type OrderedFirewallPolicyIDsAfterSystemDefinedList = Array<string>;
 export type OrderedFirewallPolicyIDsBeforeSystemDefinedList = Array<string>;
@@ -2954,12 +3031,16 @@ export interface IntegrationFirewallPolicyOrderingDto {
 export interface GetFirewallZoneRequest {
   siteId: string;
   firewallZoneId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface GetFirewallZonesRequest {
   siteId: string;
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type FirewallZonesPageDataList = Array<FirewallZone>;
 export interface FirewallZonesPage {
@@ -2969,13 +3050,18 @@ export interface FirewallZonesPage {
   offset: number;
   totalCount: number;
 }
-export interface GetInfoRequest {}
+export interface GetInfoRequest {
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
+}
 export interface ApplicationInfo {
   applicationVersion: string;
 }
 export interface GetLagRequest {
   siteId: string;
   lagId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationLocalLagGlobalDtoType = "LOCAL";
 export type IntegrationLagMemberDtoPortIdxsList = Array<number>;
@@ -3025,6 +3111,8 @@ export interface GetLagPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationLagPageDtoDataList = Array<LAGDetails>;
 export interface IntegrationLagPageDto {
@@ -3037,6 +3125,8 @@ export interface IntegrationLagPageDto {
 export interface GetMcLagDomainRequest {
   siteId: string;
   mcLagDomainId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationMcLagLocalDtoMembersList = Array<IntegrationLagMemberDto>;
 export interface IntegrationMcLagLocalDto {
@@ -3065,6 +3155,8 @@ export interface GetMcLagDomainPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationMcLagDomainDtoPageDtoDataList = Array<IntegrationMcLagDomainDto>;
 export interface IntegrationMcLagDomainDtoPageDto {
@@ -3077,11 +3169,15 @@ export interface IntegrationMcLagDomainDtoPageDto {
 export interface GetNetworkDetailsRequest {
   siteId: string;
   networkId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GetNetworkDetailsResponse = NetworkDetails;
 export interface GetNetworkReferencesRequest {
   siteId: string;
   networkId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface NetworkReferenceDetail {
   referenceId: string;
@@ -3115,6 +3211,8 @@ export interface GetNetworksOverviewPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GatewayManagedNetworkOverviewManagement = "GATEWAY";
 export interface GatewayManagedNetworkOverview {
@@ -3171,6 +3269,8 @@ export interface GetPendingDevicePageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type DevicePendingAdoptionAdoptionTargetSiteIdsList = Array<string>;
 export type DevicePendingAdoptionFeaturesItem = "switching" | "accessPoint" | "gateway";
@@ -3210,6 +3310,8 @@ export interface GetRadiusProfileOverviewPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface RadiusProfileOverview {
   id: string;
@@ -3228,6 +3330,8 @@ export interface GetSiteOverviewPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface SiteOverview {
   id: string;
@@ -3248,6 +3352,8 @@ export interface GetSiteToSiteVpnTunnelPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationDerivedSiteToSiteTunnelMetadataOrigin = "DERIVED";
 export type IntegrationDerivedSiteToSiteTunnelMetadataSource = "SDWAN";
@@ -3295,6 +3401,8 @@ export interface IntegrationSiteToSiteVpnTunnelOverviewPageDto {
 export interface GetSwitchStackRequest {
   siteId: string;
   switchStackId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationSwitchStackLagLocalDtoMembersList =
   Array<IntegrationSwitchStackLagMemberDto>;
@@ -3328,6 +3436,8 @@ export interface GetSwitchStackPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationSwitchStackDtoPageDtoDataList = Array<IntegrationSwitchStackDto>;
 export interface IntegrationSwitchStackDtoPageDto {
@@ -3340,6 +3450,8 @@ export interface IntegrationSwitchStackDtoPageDto {
 export interface GetTrafficMatchingListRequest {
   siteId: string;
   trafficMatchingListId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GetTrafficMatchingListResponse = TrafficMatchingList;
 export interface GetTrafficMatchingListsRequest {
@@ -3347,6 +3459,8 @@ export interface GetTrafficMatchingListsRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type TrafficMatchingListsPageDataList = Array<TrafficMatchingList>;
 export interface TrafficMatchingListsPage {
@@ -3359,12 +3473,16 @@ export interface TrafficMatchingListsPage {
 export interface GetVoucherRequest {
   siteId: string;
   voucherId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface GetVouchersRequest {
   siteId: string;
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type HotspotVoucherDetailPageDataList = Array<HotspotVoucherDetails>;
 export interface HotspotVoucherDetailPage {
@@ -3379,6 +3497,8 @@ export interface GetVpnServerPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationL2tpServerOverviewDtoType = "L2TP";
 export interface IntegrationL2tpServerOverviewDto {
@@ -3438,6 +3558,8 @@ export interface GetWansOverviewPageRequest {
   siteId: string;
   offset?: number | undefined;
   limit?: number | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface WANOverview {
   id: string;
@@ -3454,6 +3576,8 @@ export interface WANOverviewPage {
 export interface GetWifiBroadcastDetailsRequest {
   siteId: string;
   wifiBroadcastId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type GetWifiBroadcastDetailsResponse = WifiBroadcastDetails;
 export interface GetWifiBroadcastPageRequest {
@@ -3461,6 +3585,8 @@ export interface GetWifiBroadcastPageRequest {
   offset?: number | undefined;
   limit?: number | undefined;
   filter?: string | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type IntegrationWifiOpenSecurityConfigurationOverviewDtoType = "OPEN";
 export interface IntegrationWifiOpenSecurityConfigurationOverviewDto {
@@ -3555,27 +3681,37 @@ export interface PatchFirewallPolicyRequest {
   loggingEnabled?: boolean | undefined;
   /** Report traffic matched by this policy in Insights Flows. Ignored for the predefined Allow Return Traffic policies and the predefined policies allowing only multicast or IPv6 neighbor discovery traffic, which are never reported. */
   reportFlowEnabled?: boolean | undefined;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface RemoveDeviceRequest {
   siteId: string;
   deviceId: string;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface RemoveDeviceResponse {}
 export interface UpdateAclRuleRequest {
   siteId: string;
   aclRuleId: string;
   body: ACLRuleUpdate;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UpdateAclRuleResponse = ACLRule;
 export type UpdateAclRuleOrderingRequestOrderedAclRuleIdsList = Array<string>;
 export interface UpdateAclRuleOrderingRequest {
   siteId: string;
   orderedAclRuleIds: UpdateAclRuleOrderingRequestOrderedAclRuleIdsList;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface UpdateDnsPolicyRequest {
   siteId: string;
   dnsPolicyId: string;
   body: CreateOrUpdateDNSPolicy;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UpdateDnsPolicyResponse = DNSPolicy;
 export type UpdateFirewallPolicyRequestConnectionStateFilterItem =
@@ -3608,12 +3744,16 @@ export interface UpdateFirewallPolicyRequest {
   reportFlowEnabled?: boolean | undefined;
   schedule?: FirewallSchedule | undefined;
   source: FirewallPolicySource;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface UpdateFirewallPolicyOrderingRequest {
   siteId: string;
   sourceFirewallZoneId: string;
   destinationFirewallZoneId: string;
   orderedFirewallPolicyIds: OrderedFirewallPolicyIDs;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 /** List of Network IDs */
 export type UpdateFirewallZoneRequestNetworkIdsList = Array<string>;
@@ -3624,23 +3764,31 @@ export interface UpdateFirewallZoneRequest {
   name: string;
   /** List of Network IDs */
   networkIds: UpdateFirewallZoneRequestNetworkIdsList;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export interface UpdateNetworkRequest {
   siteId: string;
   networkId: string;
   body: CreateOrUpdateNetwork;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UpdateNetworkResponse = NetworkDetails;
 export interface UpdateTrafficMatchingListRequest {
   siteId: string;
   trafficMatchingListId: string;
   body: CreateOrUpdateTrafficMatchingList;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UpdateTrafficMatchingListResponse = TrafficMatchingList;
 export interface UpdateWifiBroadcastRequest {
   siteId: string;
   wifiBroadcastId: string;
   body: WifiBroadcastCreateOrUpdate;
+  /** The console this call goes to, over the Console layer. Not sent. */
+  console?: ConsoleLocation | undefined;
 }
 export type UpdateWifiBroadcastResponse = WifiBroadcastDetails;
 export type AdoptDeviceError = UniFiOpError;
@@ -5123,6 +5271,7 @@ function __c0(j: number): any {
           siteId: S.String.pipe(T.Label()),
           ignoreDeviceLimit: S.Boolean,
           macAddress: S.String,
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/devices", code: 200 })),
       ).annotate({ identifier: "AdoptDeviceRequest" });
   }
@@ -5240,6 +5389,7 @@ function __c3(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/acl-rules", code: 200 })),
       ).annotate({ identifier: "CreateAclRuleRequest" });
   }
@@ -5259,6 +5409,7 @@ function __c5(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           dnsPolicyId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "DELETE",
@@ -5276,6 +5427,7 @@ function __c6(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           firewallPolicyId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "DELETE",
@@ -5293,6 +5445,7 @@ function __c7(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           firewallZoneId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "DELETE",
@@ -5311,6 +5464,7 @@ function __c8(j: number): any {
           siteId: S.String.pipe(T.Label()),
           networkId: S.String.pipe(T.Label()),
           force: S.optional(S.Boolean.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "DELETE", uri: "/v1/sites/{siteId}/networks/{networkId}", code: 200 }),
         ),
@@ -5324,6 +5478,7 @@ function __c9(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           trafficMatchingListId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "DELETE",
@@ -5341,6 +5496,7 @@ function __c10(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           voucherId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "DELETE",
@@ -5368,6 +5524,7 @@ function __c12(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           filter: S.String.pipe(T.Query()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "DELETE", uri: "/v1/sites/{siteId}/hotspot/vouchers", code: 200 }),
         ),
@@ -5382,6 +5539,7 @@ function __c13(j: number): any {
           siteId: S.String.pipe(T.Label()),
           wifiBroadcastId: S.String.pipe(T.Label()),
           force: S.optional(S.Boolean.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "DELETE",
@@ -5400,6 +5558,7 @@ function __c14(j: number): any {
           siteId: S.String.pipe(T.Label()),
           deviceId: S.String.pipe(T.Label()),
           body: __S(240, __c15, 0).pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "POST",
@@ -5428,6 +5587,7 @@ function __c16(j: number): any {
           siteId: S.String.pipe(T.Label()),
           clientId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "POST",
@@ -5449,6 +5609,7 @@ function __c17(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/dns/policies", code: 200 })),
       ).annotate({ identifier: "CreateDnsPolicyRequest" });
   }
@@ -5470,6 +5631,7 @@ function __c19(j: number): any {
           deviceId: S.String.pipe(T.Label()),
           portIdx: S.Number.pipe(T.Label()),
           body: __S(240, __c15, 0).pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "POST",
@@ -5487,6 +5649,7 @@ function __c20(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           aclRuleId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/acl-rules/{aclRuleId}", code: 200 }),
         ),
@@ -5499,6 +5662,7 @@ function __c21(j: number): any {
       return S.suspend(() =>
         S.Struct({
           siteId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/acl-rules/ordering", code: 200 })),
       ).annotate({ identifier: "GetAclRuleOrderingRequest" });
   }
@@ -5522,6 +5686,7 @@ function __c23(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/acl-rules", code: 200 })),
       ).annotate({ identifier: "GetAclRulePageRequest" });
     case 1:
@@ -5545,6 +5710,7 @@ function __c24(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           deviceId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/devices/{deviceId}", code: 200 })),
       ).annotate({ identifier: "GetAdoptedDeviceDetailsRequest" });
   }
@@ -5556,6 +5722,7 @@ function __c25(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           deviceId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -5612,6 +5779,7 @@ function __c26(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/devices", code: 200 })),
       ).annotate({ identifier: "GetAdoptedDeviceOverviewPageRequest" });
     case 1:
@@ -5651,6 +5819,7 @@ function __c27(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           clientId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/clients/{clientId}", code: 200 })),
       ).annotate({ identifier: "GetConnectedClientDetailsRequest" });
     case 1:
@@ -5668,6 +5837,7 @@ function __c28(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/clients", code: 200 })),
       ).annotate({ identifier: "GetConnectedClientOverviewPageRequest" });
     case 1:
@@ -5692,6 +5862,7 @@ function __c29(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/countries", code: 200 })),
       ).annotate({ identifier: "GetCountriesRequest" });
     case 1:
@@ -5733,6 +5904,7 @@ function __c30(j: number): any {
           reportFlowEnabled: S.optional(S.Boolean),
           schedule: S.optional(S.Unknown),
           source: __S(513, __c32, 1),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/firewall/policies", code: 200 })),
       ).annotate({ identifier: "CreateFirewallPolicyRequest" });
   }
@@ -5834,6 +6006,7 @@ function __c33(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(__S(534, __c33, 6).pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/device-tags", code: 200 })),
       ).annotate({ identifier: "GetDeviceTagPageRequest" });
     case 8:
@@ -5866,6 +6039,7 @@ function __c34(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           dnsPolicyId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -5885,6 +6059,7 @@ function __c35(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/dns/policies", code: 200 })),
       ).annotate({ identifier: "GetDnsPolicyPageRequest" });
     case 1:
@@ -5909,6 +6084,7 @@ function __c36(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/dpi/categories", code: 200 })),
       ).annotate({ identifier: "GetDpiApplicationCategoriesRequest" });
   }
@@ -5944,6 +6120,7 @@ function __c38(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/dpi/applications", code: 200 })),
       ).annotate({ identifier: "GetDpiApplicationsRequest" });
   }
@@ -5957,6 +6134,7 @@ function __c39(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/firewall/policies", code: 200 })),
       ).annotate({ identifier: "GetFirewallPoliciesRequest" });
     case 1:
@@ -5980,6 +6158,7 @@ function __c40(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           firewallPolicyId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -5998,6 +6177,7 @@ function __c41(j: number): any {
           siteId: S.String.pipe(T.Label()),
           sourceFirewallZoneId: S.String.pipe(T.Query()),
           destinationFirewallZoneId: S.String.pipe(T.Query()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6032,6 +6212,7 @@ function __c43(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           firewallZoneId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6051,6 +6232,7 @@ function __c44(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/firewall/zones", code: 200 })),
       ).annotate({ identifier: "GetFirewallZonesRequest" });
     case 1:
@@ -6075,6 +6257,7 @@ function __c45(j: number): any {
           siteId: S.String.pipe(T.Label()),
           name: S.String,
           networkIds: __S(736, __c46, 0),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/firewall/zones", code: 200 })),
       ).annotate({ identifier: "CreateFirewallZoneRequest" });
   }
@@ -6102,7 +6285,9 @@ function __c48(j: number): any {
   switch (j) {
     case 0:
       return S.suspend(() =>
-        S.Struct({}).pipe(T.Http({ method: "GET", uri: "/v1/info", code: 200 })),
+        S.Struct({
+          console: S.optional(S.Unknown),
+        }).pipe(T.Http({ method: "GET", uri: "/v1/info", code: 200 })),
       ).annotate({ identifier: "GetInfoRequest" });
     case 1:
       return S.suspend(() =>
@@ -6119,6 +6304,7 @@ function __c49(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           lagId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/switching/lags/{lagId}", code: 200 }),
         ),
@@ -6138,6 +6324,7 @@ function __c50(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/switching/lags", code: 200 })),
       ).annotate({ identifier: "GetLagPageRequest" });
     case 1:
@@ -6161,6 +6348,7 @@ function __c51(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           mcLagDomainId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6223,6 +6411,7 @@ function __c53(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/switching/mc-lag-domains", code: 200 }),
         ),
@@ -6248,6 +6437,7 @@ function __c54(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           networkId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/networks/{networkId}", code: 200 }),
         ),
@@ -6261,6 +6451,7 @@ function __c55(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           networkId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6304,6 +6495,7 @@ function __c56(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/networks", code: 200 })),
       ).annotate({ identifier: "GetNetworksOverviewPageRequest" });
     case 1:
@@ -6328,6 +6520,7 @@ function __c57(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/pending-devices", code: 200 })),
       ).annotate({ identifier: "GetPendingDevicePageRequest" });
     case 1:
@@ -6367,6 +6560,7 @@ function __c58(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/radius/profiles", code: 200 })),
       ).annotate({ identifier: "GetRadiusProfileOverviewPageRequest" });
     case 1:
@@ -6398,6 +6592,7 @@ function __c59(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/networks", code: 200 })),
       ).annotate({ identifier: "CreateNetworkRequest" });
   }
@@ -6418,6 +6613,7 @@ function __c61(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites", code: 200 })),
       ).annotate({ identifier: "GetSiteOverviewPageRequest" });
     case 1:
@@ -6451,6 +6647,7 @@ function __c62(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/vpn/site-to-site-tunnels", code: 200 }),
         ),
@@ -6476,6 +6673,7 @@ function __c63(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           switchStackId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6541,6 +6739,7 @@ function __c65(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/switching/switch-stacks", code: 200 }),
         ),
@@ -6566,6 +6765,7 @@ function __c66(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           trafficMatchingListId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6585,6 +6785,7 @@ function __c67(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "GET", uri: "/v1/sites/{siteId}/traffic-matching-lists", code: 200 }),
         ),
@@ -6610,6 +6811,7 @@ function __c68(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           voucherId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6629,6 +6831,7 @@ function __c69(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/hotspot/vouchers", code: 200 })),
       ).annotate({ identifier: "GetVouchersRequest" });
     case 1:
@@ -6652,6 +6855,7 @@ function __c70(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/vpn/servers", code: 200 })),
       ).annotate({ identifier: "GetVpnServerPageRequest" });
     case 1:
@@ -6676,6 +6880,7 @@ function __c71(j: number): any {
           siteId: S.String.pipe(T.Label()),
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/wans", code: 200 })),
       ).annotate({ identifier: "GetWansOverviewPageRequest" });
     case 1:
@@ -6706,6 +6911,7 @@ function __c72(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "POST", uri: "/v1/sites/{siteId}/traffic-matching-lists", code: 200 }),
         ),
@@ -6727,6 +6933,7 @@ function __c74(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           wifiBroadcastId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "GET",
@@ -6746,6 +6953,7 @@ function __c75(j: number): any {
           offset: S.optional(S.Number.pipe(T.Query())),
           limit: S.optional(S.Number.pipe(T.Query())),
           filter: S.optional(S.String.pipe(T.Query())),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "GET", uri: "/v1/sites/{siteId}/wifi/broadcasts", code: 200 })),
       ).annotate({ identifier: "GetWifiBroadcastPageRequest" });
     case 1:
@@ -6771,6 +6979,7 @@ function __c76(j: number): any {
           firewallPolicyId: S.String.pipe(T.Label()),
           loggingEnabled: S.optional(S.Boolean),
           reportFlowEnabled: S.optional(S.Boolean),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PATCH",
@@ -6788,6 +6997,7 @@ function __c77(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           deviceId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "DELETE", uri: "/v1/sites/{siteId}/devices/{deviceId}", code: 200 }),
         ),
@@ -6802,6 +7012,7 @@ function __c78(j: number): any {
           siteId: S.String.pipe(T.Label()),
           aclRuleId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "PUT", uri: "/v1/sites/{siteId}/acl-rules/{aclRuleId}", code: 200 }),
         ),
@@ -6815,6 +7026,7 @@ function __c79(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           orderedAclRuleIds: __S(736, __c46, 0),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "PUT", uri: "/v1/sites/{siteId}/acl-rules/ordering", code: 200 })),
       ).annotate({ identifier: "UpdateAclRuleOrderingRequest" });
   }
@@ -6827,6 +7039,7 @@ function __c80(j: number): any {
           siteId: S.String.pipe(T.Label()),
           dnsPolicyId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PUT",
@@ -6856,6 +7069,7 @@ function __c81(j: number): any {
           reportFlowEnabled: S.optional(S.Boolean),
           schedule: S.optional(S.Unknown),
           source: __S(513, __c32, 1),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PUT",
@@ -6875,6 +7089,7 @@ function __c82(j: number): any {
           sourceFirewallZoneId: S.String.pipe(T.Query()),
           destinationFirewallZoneId: S.String.pipe(T.Query()),
           orderedFirewallPolicyIds: __S(672, __c42, 0),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PUT",
@@ -6894,6 +7109,7 @@ function __c83(j: number): any {
           firewallZoneId: S.String.pipe(T.Label()),
           name: S.String,
           networkIds: __S(736, __c46, 0),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PUT",
@@ -6917,6 +7133,7 @@ function __c84(j: number): any {
           rxRateLimitKbps: S.optional(S.Number),
           timeLimitMinutes: S.Number,
           txRateLimitKbps: S.optional(S.Number),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/hotspot/vouchers", code: 200 })),
       ).annotate({ identifier: "CreateVouchersRequest" });
     case 1:
@@ -6963,6 +7180,7 @@ function __c87(j: number): any {
           siteId: S.String.pipe(T.Label()),
           networkId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "PUT", uri: "/v1/sites/{siteId}/networks/{networkId}", code: 200 }),
         ),
@@ -6977,6 +7195,7 @@ function __c88(j: number): any {
           siteId: S.String.pipe(T.Label()),
           trafficMatchingListId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PUT",
@@ -6995,6 +7214,7 @@ function __c89(j: number): any {
           siteId: S.String.pipe(T.Label()),
           wifiBroadcastId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({
             method: "PUT",
@@ -7012,6 +7232,7 @@ function __c90(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           body: S.Unknown.pipe(T.HttpBody()),
+          console: S.optional(S.Unknown),
         }).pipe(T.Http({ method: "POST", uri: "/v1/sites/{siteId}/wifi/broadcasts", code: 200 })),
       ).annotate({ identifier: "CreateWifiBroadcastRequest" });
   }
@@ -7031,6 +7252,7 @@ function __c92(j: number): any {
         S.Struct({
           siteId: S.String.pipe(T.Label()),
           aclRuleId: S.String.pipe(T.Label()),
+          console: S.optional(S.Unknown),
         }).pipe(
           T.Http({ method: "DELETE", uri: "/v1/sites/{siteId}/acl-rules/{aclRuleId}", code: 200 }),
         ),
